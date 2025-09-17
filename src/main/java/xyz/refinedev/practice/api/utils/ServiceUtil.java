@@ -1,4 +1,4 @@
-package xyz.refinedev.practice.api.util;
+package xyz.refinedev.practice.api.utils;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;

@@ -3,7 +3,7 @@ package xyz.refinedev.practice.api.queue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xyz.refinedev.practice.api.kit.IKit;
-import xyz.refinedev.practice.api.util.ServiceUtil;
+import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.List;
 import java.util.UUID;

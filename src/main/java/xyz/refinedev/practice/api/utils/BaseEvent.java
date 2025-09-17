@@ -1,4 +1,4 @@
-package xyz.refinedev.practice.api.util;
+package xyz.refinedev.practice.api.utils;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;

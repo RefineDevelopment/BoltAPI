@@ -1,4 +1,4 @@
-package xyz.refinedev.practice.api.match.enums;
+package xyz.refinedev.practice.api.match;
 
 /**
  * <p>

@@ -1,7 +1,7 @@
 package xyz.refinedev.practice.api.profile;
 
 import org.bukkit.entity.Player;
-import xyz.refinedev.practice.api.util.ServiceUtil;
+import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;

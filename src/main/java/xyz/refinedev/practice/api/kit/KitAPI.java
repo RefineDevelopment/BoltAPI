@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import xyz.refinedev.practice.api.queue.IQueue;
-import xyz.refinedev.practice.api.util.ServiceUtil;
+import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.List;
 import java.util.Map;

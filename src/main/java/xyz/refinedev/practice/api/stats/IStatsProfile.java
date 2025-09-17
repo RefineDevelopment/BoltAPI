@@ -5,6 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import xyz.refinedev.practice.api.division.IDivision;
 import xyz.refinedev.practice.api.kit.IKit;
 
+import java.util.UUID;
+
 /**
  * <p>
  * This code is the property of Refine Development.<br>
@@ -16,6 +18,13 @@ import xyz.refinedev.practice.api.kit.IKit;
  * @since 9/14/2025
  */
 public interface IStatsProfile {
+
+    /**
+     * Get the unique ID of the profile
+     *
+     * @return {@link UUID} of the profile
+     */
+    UUID getUniqueId();
 
     /**
      * Add experience to the stats profile.

@@ -19,4 +19,5 @@ dependencies {
     }
     compileOnly("com.github.cryptomorin:XSeries:12.1.0")
     compileOnly("org.jetbrains:annotations:24.0.1")
+    compileOnly("xyz.refinedev.api:SkinAPI:1.1")
 }

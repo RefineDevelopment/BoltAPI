@@ -1,4 +1,4 @@
-package xyz.refinedev.practice.api.match;
+package xyz.refinedev.practice.api.match.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

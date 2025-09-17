@@ -1,4 +1,4 @@
-package xyz.refinedev.practice.api.match;
+package xyz.refinedev.practice.api.match.enums;
 
 /**
  * <p>
@@ -9,10 +9,10 @@ package xyz.refinedev.practice.api.match;
  *
  * @author Drizzy
  * @version Bolt
- * @since 10/2/2023
+ * @since 8/13/2022
  */
-public enum MatchDeathReason {
 
-    DISCONNECTED, FORFEITED, SUICIDE, PROJECTILE_KILL, VOID_KILL, NORMAL_KILL
+public enum MatchState {
 
+    STARTING, FIGHTING, ENDING
 }

@@ -253,11 +253,17 @@ public interface IMatch {
 
     /**
      * Is the given block breakable or not for this specific match instance
+     *
+     * @param block {@link Block} the block being checked
+     * @return      {@link Boolean} true if the block is breakable, false otherwise
      */
     boolean isBreakable(Block block);
 
     /**
      * Is the given block droppable or not for this specific match instance
+     *
+     * @param block {@link Block} the block being checked
+     * @return      {@link Boolean} true if the block is droppable, false otherwise
      */
     boolean isDroppable(Block block);
 
@@ -443,7 +449,7 @@ public interface IMatch {
     /**
      * Get a predicate that checks if the player is on the red team
      *
-     * @return {@link Predicate<IMatchPlayer>} where the player is on the red team
+     * @return {@link Predicate} of {@link IMatchPlayer} which defines if the player is on the red team
      */
     Predicate<IMatchPlayer> isRedTeamPredicate();
 

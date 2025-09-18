@@ -25,6 +25,8 @@ public interface IMatchPlayer {
     /**
      * UUID-based identifier for the player.
      * This refers to the player's uuid
+     *
+     * @return UUID of the player
      */
     UUID getUniqueId();
 
@@ -32,6 +34,8 @@ public interface IMatchPlayer {
      * This is usually equivalent to {@link Player#getName}
      * but this is cached and saved along with match data, so
      * it can be different if the player changed their name.
+     *
+     * @return The username of the player
      */
     String getUsername();
 
@@ -224,12 +228,11 @@ public interface IMatchPlayer {
      * This is usually the same as {@link Player#getDisplayName()}
      * but this is cached and saved along with match data. It also
      * the disguised name if the player is disguised.
+     *
+     * @return The display name of the player
      */
     String getDisplayName();
 
-    /** Miscellaneous statistics tracked during the match for
-     * post match inventory viewing.
-     */
     double getPotionAccuracy();
     int getPotionsThrown();
     int getPotionsMissed();

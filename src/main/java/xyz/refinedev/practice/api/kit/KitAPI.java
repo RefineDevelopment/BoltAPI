@@ -49,7 +49,8 @@ public interface KitAPI {
      * Register a kit to the storage. This will also handle
      * creation of the {@link IQueue}s for all valid types.
      *
-     * @param kit {@link IKit} to register
+     * @param kit  {@link IKit} to register
+     * @param save Should the kit also be saved?
      */
     void registerKit(@NotNull IKit kit, boolean save);
 

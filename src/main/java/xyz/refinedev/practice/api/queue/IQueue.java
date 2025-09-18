@@ -24,7 +24,7 @@ public interface IQueue {
     String getName();
 
     /**
-     * Get the Type of queue
+     * @return The {@link QueueType} of this queue.
      */
     QueueType getType();
 

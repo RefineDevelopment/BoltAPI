@@ -269,14 +269,14 @@ public interface IPostMatchInventory {
     /**
      * The potion effects this player had at the end of the match.
      *
-     * @return {@link Collection<PotionEffect>} of effects
+     * @return {@link Collection} of effects
      */
     Collection<PotionEffect> getEffects();
 
     /**
      * Sets the potion effects this player had at the end of the match.
      *
-     * @param effects {@link Collection<PotionEffect>} of effects
+     * @param effects {@link Collection} of effects
      */
     void setEffects(Collection<PotionEffect> effects);
 }

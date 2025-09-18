@@ -44,7 +44,7 @@ public interface IDivision {
     ItemStack getIcon();
 
     /**
-     * '&' based color code for this division.
+     * Color string for this division.
      *
      * @return The color code.
      */

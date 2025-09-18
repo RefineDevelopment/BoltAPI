@@ -41,7 +41,7 @@ public interface StatsAPI {
      * Otherwise, it will fetch the data from the database asynchronously.
      *
      * @param uuid {@link UUID} to get the stats profile of
-     * @return {@link CompletableFuture<IStatsProfile>} of the player
+     * @return {@link CompletableFuture} of the player's {@link IStatsProfile}
      */
     CompletableFuture<IStatsProfile> getStatsProfile(UUID uuid);
 

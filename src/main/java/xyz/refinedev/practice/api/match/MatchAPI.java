@@ -43,6 +43,7 @@ public interface MatchAPI {
      * handle updating stats, ELO, and other match related data.
      *
      * @param match {@link IMatch}
+     * @param reason {@link MatchEndReason}
      */
     void end(IMatchPlayer match, MatchEndReason reason);
 
@@ -75,7 +76,7 @@ public interface MatchAPI {
      * Like in battle rush, the blocks need to be cleared after each round.
      *
      * @param match {@link IMatch}
-     * @return {@link CompletableFuture<Boolean>} whether the blocks were reset successfully or not
+     * @return {@link CompletableFuture} of {@link Boolean} whether the blocks were reset successfully or not
      */
     CompletableFuture<Boolean> resetBlocks(IMatch match);
 
@@ -85,7 +86,7 @@ public interface MatchAPI {
      * This will reset both the blocks and the entities in the arena.
      *
      * @param match {@link IMatch}
-     * @return {@link CompletableFuture<Boolean>} whether the arena was reset successfully or not
+     * @return {@link CompletableFuture} of {@link Boolean} whether the arena was reset successfully or not
      */
     CompletableFuture<Boolean> resetArena(IMatch match);
 

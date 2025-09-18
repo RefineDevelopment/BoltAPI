@@ -1,8 +1,12 @@
 package xyz.refinedev.practice.api.profile;
 
 import org.bukkit.entity.Player;
+
+import xyz.refinedev.practice.api.profile.history.IProfileHistory;
 import xyz.refinedev.practice.api.utils.ServiceUtil;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -31,7 +35,7 @@ public interface ProfileAPI {
      * Get the profile of a player
      *
      * @param player {@link Player} to get the profile of
-     * @return {@link IProfile} of the player
+     * @return       {@link IProfile} of the player
      */
     IProfile getProfile(Player player);
 
@@ -39,7 +43,7 @@ public interface ProfileAPI {
      * Get the profile of a player
      *
      * @param uniqueId {@link UUID} to get the profile of
-     * @return {@link IProfile} of the player
+     * @return         {@link IProfile} of the player
      */
     IProfile getProfile(UUID uniqueId);
 
@@ -49,7 +53,7 @@ public interface ProfileAPI {
      * Otherwise, it will fetch the data from the database asynchronously.
      *
      * @param uniqueId {@link UUID} to get the profile of
-     * @return {@link CompletableFuture<IProfile>} of the player
+     * @return         {@link CompletableFuture} of the player's {@link IProfile}
      */
     CompletableFuture<IProfile> fetchProfile(UUID uniqueId);
 
@@ -60,6 +64,22 @@ public interface ProfileAPI {
      * @param async   whether to save the profile asynchronously or not
      */
     void saveProfile(IProfile profile, boolean async);
+
+    /**
+     * Get the profile histories of a player
+     *
+     * @param profile {@link IProfile} to get the histories of
+     * @return        {@link List} of {@link IProfileHistory} of the player
+     */
+    CompletableFuture<List<IProfileHistory>> getProfileHistories(IProfile profile);
+
+    /**
+     * Fetch a profile history by its ID
+     *
+     * @param id {@link String} of the profile history to fetch
+     * @return   {@link CompletableFuture} of an {@link Optional} of the {@link IProfileHistory}
+     */
+    CompletableFuture<Optional<IProfileHistory>> fetchProfileHistory(String id);
 
     /**
      * Refresh the hotbar of a player based on their profile state.

@@ -3,8 +3,6 @@ package xyz.refinedev.practice.api.leaderboard;
 import xyz.refinedev.practice.api.kit.IKit;
 import xyz.refinedev.practice.api.leaderboard.meta.IKitLeaderboard;
 import xyz.refinedev.practice.api.leaderboard.meta.ILeaderboardEntry;
-import xyz.refinedev.practice.api.stats.StatsAPI;
-import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -23,15 +21,6 @@ import java.util.concurrent.CompletableFuture;
  * @since 9/18/2025
  */
 public interface LeaderboardAPI {
-
-    StatsAPI BRIDGE = ServiceUtil.findFirst(StatsAPI.class).orElse(null);
-
-    static StatsAPI instance() {
-        if (BRIDGE == null) {
-            throw new IllegalStateException("No implementation found");
-        }
-        return BRIDGE;
-    }
 
     /**
      * Updates the leaderboards by fetching the latest data from the database.

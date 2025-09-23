@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 
 import xyz.refinedev.practice.api.profile.IProfile;
-import xyz.refinedev.practice.api.utils.BaseEvent;
 
 /**
  * <p>
@@ -22,9 +23,19 @@ import xyz.refinedev.practice.api.utils.BaseEvent;
 
 @Getter
 @RequiredArgsConstructor
-public class ProfileJoinEvent extends BaseEvent {
+public class ProfileJoinEvent extends Event {
+
+    private static final HandlerList handlers = new HandlerList();
 
     private final Player player;
     private final IProfile profile;
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
 }

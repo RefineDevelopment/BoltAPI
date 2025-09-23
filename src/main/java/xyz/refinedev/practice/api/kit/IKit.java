@@ -1,14 +1,15 @@
 package xyz.refinedev.practice.api.kit;
 
 import com.cryptomorin.xseries.XMaterial;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import xyz.refinedev.practice.api.queue.IQueue;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * <p>
@@ -254,32 +255,32 @@ public interface IKit {
     Set<XMaterial> getDroppableBlocks();
 
     /**
-     * Get the unranked solo queue for this kit.
+     * Get the unranked solo queue id for this kit.
      *
      * @return The unranked solo queue for this kit
      */
-    IQueue getSoloUnrankedQueue();
+    UUID getSoloUnrankedQueue();
 
     /**
-     * Get the ranked solo queue for this kit.
+     * Get the ranked solo queue id for this kit.
      *
      * @return The ranked solo queue for this kit
      */
-    IQueue getSoloRankedQueue();
+    UUID getSoloRankedQueue();
 
     /**
-     * Get the unranked duo queue for this kit.
+     * Get the unranked duo queue id for this kit.
      *
      * @return The unranked duo queue for this kit
      */
-    IQueue getDuoUnrankedQueue();
+    UUID getDuoUnrankedQueue();
 
     /**
-     * Get the ranked duo queue for this kit.
+     * Get the ranked duo queue id for this kit.
      *
      * @return The ranked duo queue for this kit
      */
-    IQueue getDuoRankedQueue();
+    UUID getDuoRankedQueue();
 
     /**
      * Applies the kit to the given player.

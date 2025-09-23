@@ -63,7 +63,7 @@ public interface IMatchPlayer {
      *
      * @return {@link List} of {@link Location} or null
      */
-    @Nullable List<Location> getBedLocation();
+    @Nullable List<Location> getBedLocations();
 
     /**
      * The spawn location of this player in the match.
@@ -119,7 +119,7 @@ public interface IMatchPlayer {
      *
      * @return true if the player has their bed
      */
-    boolean hasBed();
+    boolean isHasBed();
 
     /**
      * The coins earned by this player during the match.

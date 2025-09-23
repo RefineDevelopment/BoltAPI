@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 
 import xyz.refinedev.practice.api.kit.IKit;
 import xyz.refinedev.practice.api.profile.IProfile;
-import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,15 +23,6 @@ import java.util.UUID;
  */
 
 public interface QueueAPI {
-
-    QueueAPI BRIDGE = ServiceUtil.findFirst(QueueAPI.class).orElse(null);
-
-    static QueueAPI instance() {
-        if (BRIDGE == null) {
-            throw new IllegalStateException("No implementation found");
-        }
-        return BRIDGE;
-    }
 
     /**
      * Get a {@link IQueue} by its associated {@link UUID}.

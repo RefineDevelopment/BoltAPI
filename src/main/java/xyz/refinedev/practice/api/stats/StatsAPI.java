@@ -1,7 +1,6 @@
 package xyz.refinedev.practice.api.stats;
 
 import org.bukkit.entity.Player;
-import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -17,15 +16,6 @@ import java.util.concurrent.CompletableFuture;
  * @since 9/14/2025
  */
 public interface StatsAPI {
-
-    StatsAPI BRIDGE = ServiceUtil.findFirst(StatsAPI.class).orElse(null);
-
-    static StatsAPI instance() {
-        if (BRIDGE == null) {
-            throw new IllegalStateException("No implementation found");
-        }
-        return BRIDGE;
-    }
 
     /**
      * Get the stats profile of a player

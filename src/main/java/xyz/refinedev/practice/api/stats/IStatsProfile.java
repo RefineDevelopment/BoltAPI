@@ -27,6 +27,34 @@ public interface IStatsProfile {
     UUID getUniqueId();
 
     /**
+     * Get the global ELO from the stats profile.
+     *
+     * @return The global ELO.
+     */
+    int getGlobalElo();
+
+    /**
+     * Get the number of wins from the stats profile.
+     *
+     * @return The number of wins.
+     */
+    int getWins();
+
+    /**
+     * Get the number of losses from the stats profile.
+     *
+     * @return The number of losses.
+     */
+    int getLosses();
+
+    /**
+     * Get the number of kills from the stats profile.
+     *
+     * @return The number of kills.
+     */
+    int getKills();
+
+    /**
      * Add experience to the stats profile.
      *
      * @param experience the amount of experience to add

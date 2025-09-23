@@ -121,7 +121,7 @@ public interface IMatch {
      *
      * @return True if the match is being force ended, false otherwise.
      */
-    boolean isForceEnd();
+    boolean isForcedEnd();
 
     /**
      * Checks if the match was terminated because the server is shutting down.
@@ -233,7 +233,7 @@ public interface IMatch {
      *
      * @param consumer {@link Function} to apply
      */
-    void broadcastFormattedMessage(Consumer<Player> consumer);
+    void forEachPlayer(Consumer<Player> consumer);
 
     /**
      * Send a title to all match participants
@@ -452,6 +452,13 @@ public interface IMatch {
      * @return {@link Predicate} of {@link IMatchPlayer} which defines if the player is on the red team
      */
     Predicate<IMatchPlayer> isRedTeamPredicate();
+
+    /**
+     * Get all participants in the match as a list of {@link Player} objects.
+     *
+     * @return {@link List} of {@link Player} objects representing all participants in the match.
+     */
+    List<Player> getPlayers();
 
     /**
      * Returns a list of every player involved in this match

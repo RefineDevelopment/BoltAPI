@@ -2,11 +2,11 @@ package xyz.refinedev.practice.api.kit;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import xyz.refinedev.practice.api.queue.IQueue;
-import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -23,15 +23,6 @@ import java.util.concurrent.CompletableFuture;
  * @since 9/14/2025
  */
 public interface KitAPI {
-
-    KitAPI BRIDGE = ServiceUtil.findFirst(KitAPI.class).orElse(null);
-
-    static KitAPI instance() {
-        if (BRIDGE == null) {
-            throw new IllegalStateException("No implementation found");
-        }
-        return BRIDGE;
-    }
 
     /**
      * Create a new Kit Builder instance

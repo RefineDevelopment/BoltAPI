@@ -2,7 +2,10 @@ package xyz.refinedev.practice.api.profile.events;
 
 import lombok.Getter;
 import lombok.Setter;
-import xyz.refinedev.practice.api.utils.BaseEvent;
+
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 
 import java.util.UUID;
 
@@ -19,11 +22,15 @@ import java.util.UUID;
  */
 
 @Getter @Setter
-public class ProfileLoginEvent extends BaseEvent {
+public class ProfileLoginEvent extends Event implements Cancellable {
+
+    private static final HandlerList handlers = new HandlerList();
 
     private final String name;
     private final UUID uuid;
     private String kickMessage;
+
+    private boolean cancelled;
 
     public ProfileLoginEvent(String name, UUID uuid) {
         super(true);
@@ -31,4 +38,21 @@ public class ProfileLoginEvent extends BaseEvent {
         this.uuid = uuid;
     }
 
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean b) {
+        this.cancelled = b;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 }

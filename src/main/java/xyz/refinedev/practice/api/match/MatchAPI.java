@@ -6,9 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import xyz.refinedev.practice.api.match.enums.MatchDeathReason;
 import xyz.refinedev.practice.api.match.enums.MatchEndReason;
-import xyz.refinedev.practice.api.match.meta.IMatchPlayer;
 import xyz.refinedev.practice.api.match.meta.IPostMatchInventory;
-import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -26,15 +24,6 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface MatchAPI {
 
-    MatchAPI BRIDGE = ServiceUtil.findFirst(MatchAPI.class).orElse(null);
-
-    static MatchAPI instance() {
-        if (BRIDGE == null) {
-            throw new IllegalStateException("No implementation found");
-        }
-        return BRIDGE;
-    }
-
     /**
      * This handles the statistical requirements of ending a match.
      * After completion, it will terminate the match. Ending a match
@@ -45,7 +34,7 @@ public interface MatchAPI {
      * @param match {@link IMatch}
      * @param reason {@link MatchEndReason}
      */
-    void end(IMatchPlayer match, MatchEndReason reason);
+    void end(IMatch match, MatchEndReason reason);
 
     /**
      * This cleans up the match and teleports  all players and spectators

@@ -2,9 +2,12 @@ package xyz.refinedev.practice.api.match.events.player;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
+
 import xyz.refinedev.practice.api.match.IMatch;
-import xyz.refinedev.practice.api.utils.BaseEvent;
 
 /**
  * <p>
@@ -20,9 +23,18 @@ import xyz.refinedev.practice.api.utils.BaseEvent;
 
 @Getter
 @RequiredArgsConstructor
-public class MatchSpectatorLeaveEvent extends BaseEvent {
+public class MatchSpectatorLeaveEvent extends Event {
+    private static final HandlerList handlers = new HandlerList();
 
     private final IMatch match;
     private final Player spectator;
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
 }

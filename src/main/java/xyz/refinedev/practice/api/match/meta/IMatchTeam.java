@@ -27,14 +27,14 @@ public interface IMatchTeam {
      *
      * @return {@link List} of {@link Location} or null
      */
-    @Nullable List<Location> getBedLocation();
+    @Nullable List<Location> getBedLocations();
 
     /**
      * Does this team still have their bed?
      *
      * @return true if the team has their bed
      */
-    boolean hasBed();
+    boolean isHasBed();
 
     /**
      * The points scored by this team in the match.

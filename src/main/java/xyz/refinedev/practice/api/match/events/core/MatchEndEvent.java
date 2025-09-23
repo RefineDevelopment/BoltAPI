@@ -3,11 +3,12 @@ package xyz.refinedev.practice.api.match.events.core;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
+
 import xyz.refinedev.practice.api.match.IMatch;
 import xyz.refinedev.practice.api.match.MatchAPI;
 import xyz.refinedev.practice.api.match.enums.MatchEndReason;
-import xyz.refinedev.practice.api.match.meta.IMatchPlayer;
-import xyz.refinedev.practice.api.utils.BaseEvent;
 
 /**
  * <p>
@@ -17,7 +18,7 @@ import xyz.refinedev.practice.api.utils.BaseEvent;
  * </p>
  *
  * This is called when a match ends normally and successfully.
- * For more information, see {@link MatchAPI#end(IMatchPlayer, MatchEndReason)}
+ * For more information, see {@link MatchAPI#end(IMatch, MatchEndReason)}
  *
  * @author Drizzy
  * @version Bolt
@@ -26,7 +27,18 @@ import xyz.refinedev.practice.api.utils.BaseEvent;
 
 @Getter
 @RequiredArgsConstructor
-public class MatchEndEvent extends BaseEvent {
+public class MatchEndEvent extends Event {
+
+    private static final HandlerList handlers = new HandlerList();
 
     private final IMatch match;
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    public HandlerList getHandlers() {
+        return handlers;
+    }
+    
 }

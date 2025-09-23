@@ -36,9 +36,7 @@ tasks.named<Jar>("javadocJar") {
 }
 
 dependencies {
-    compileOnly("org.github.paperspigot:paperspigot:1.8.8-R0.1-SNAPSHOT") {
-        exclude("com.google.code.gson", "gson")
-    }
+    compileOnly("io.papermc.paper:paper-api:1.8.8-R0.1-SNAPSHOT")
     compileOnly("com.github.cryptomorin:XSeries:12.1.0")
     compileOnly("org.jetbrains:annotations:24.0.1")
     compileOnly("xyz.refinedev.api:SkinAPI:1.1")

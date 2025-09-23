@@ -17,6 +17,13 @@ import java.util.UUID;
 public interface IQueue {
 
     /**
+     * Returns the Queue's ID
+     *
+     * @return Queue ID in {@link UUID}
+     */
+    UUID getUniqueId();
+
+    /**
      * Returns the Queue's Formatted Name
      *
      * @return Formatted Name in {@link String}

@@ -3,7 +3,6 @@ package xyz.refinedev.practice.api.profile;
 import org.bukkit.entity.Player;
 
 import xyz.refinedev.practice.api.profile.history.IProfileHistory;
-import xyz.refinedev.practice.api.utils.ServiceUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,15 +20,6 @@ import java.util.concurrent.CompletableFuture;
  * @since 9/14/2025
  */
 public interface ProfileAPI {
-
-    ProfileAPI BRIDGE = ServiceUtil.findFirst(ProfileAPI.class).orElse(null);
-
-    static ProfileAPI instance() {
-        if (BRIDGE == null) {
-            throw new IllegalStateException("No implementation found");
-        }
-        return BRIDGE;
-    }
 
     /**
      * Get the profile of a player

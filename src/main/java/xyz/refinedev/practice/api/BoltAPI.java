@@ -20,6 +20,7 @@ import xyz.refinedev.practice.api.stats.StatsAPI;
  * @since 9/23/2025
  */
 
+@SuppressWarnings("unused")
 public enum BoltAPI {
 
     INSTANCE;

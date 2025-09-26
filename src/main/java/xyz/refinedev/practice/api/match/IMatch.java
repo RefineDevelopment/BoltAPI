@@ -309,7 +309,7 @@ public interface IMatch {
      *
      * @return {@link Boolean}
      */
-    boolean isHCFMatch();
+    @Deprecated default boolean isHCFMatch() { return false; }
 
     /**
      * This method returns true if the kit is bridges

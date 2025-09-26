@@ -1,5 +1,5 @@
 plugins {
-    id("java")
+    id("java-library")
     id("io.freefair.lombok") version "8.12.1"
     id("maven-publish")
 }
@@ -37,9 +37,10 @@ tasks.named<Jar>("javadocJar") {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("com.github.cryptomorin:XSeries:12.1.0")
     compileOnly("org.jetbrains:annotations:24.0.1")
-    compileOnly("xyz.refinedev.api:SkinAPI:1.1")
+    compileOnlyApi("com.github.cryptomorin:XSeries:12.1.0")
+    compileOnlyApi("xyz.refinedev.api:SkinAPI:1.1")
+    compileOnlyApi("xyz.refinedev.api:KnockbackAPI:1.0.0")
 }
 
 publishing {

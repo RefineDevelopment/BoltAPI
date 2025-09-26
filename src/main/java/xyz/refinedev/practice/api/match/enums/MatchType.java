@@ -21,7 +21,6 @@ public enum MatchType {
     TEAM_BOXING("Team Boxing"),
     TEAM_BRIDGE("Team Bridge"),
     TEAM_BATTLE_RUSH("Team Battle Rush"),
-    TEAM_FIGHT("HCF Team Fight"),
     //TEAM_EMERALD_RUSH,
 
     FFA("FFA"),

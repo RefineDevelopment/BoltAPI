@@ -2,6 +2,8 @@ package xyz.refinedev.practice.api;
 
 import com.google.common.base.Preconditions;
 
+import xyz.refinedev.api.knockback.IKnockbackHandler;
+import xyz.refinedev.api.knockback.KnockbackHook;
 import xyz.refinedev.practice.api.kit.KitAPI;
 import xyz.refinedev.practice.api.leaderboard.LeaderboardAPI;
 import xyz.refinedev.practice.api.match.MatchAPI;
@@ -31,6 +33,13 @@ public enum BoltAPI {
     private MatchAPI matchAPI;
     private StatsAPI statsAPI;
     private LeaderboardAPI leaderboardAPI;
+
+    /**
+     * Bolt's knockback API to allow custom knockback implementations
+     * for your own spigot fork/server. You can set your own implementation
+     * by implementing {@link KnockbackHook} and setting it via {@link IKnockbackHandler#setHook(KnockbackHook)}
+     */
+    private IKnockbackHandler knockbackHandler;
 
     public ProfileAPI getProfileAPI() {
         Preconditions.checkNotNull(profileAPI, "ProfileAPI has not been initialized yet.");
@@ -84,5 +93,14 @@ public enum BoltAPI {
 
     public void setLeaderboardAPI(LeaderboardAPI leaderboardAPI) {
         this.leaderboardAPI = leaderboardAPI;
+    }
+
+    public IKnockbackHandler getKnockbackHandler() {
+        Preconditions.checkNotNull(knockbackHandler, "KnockbackHandler has not been initialized yet.");
+        return knockbackHandler;
+    }
+
+    public void setKnockbackHandler(IKnockbackHandler knockbackHandler) {
+        this.knockbackHandler = knockbackHandler;
     }
 }

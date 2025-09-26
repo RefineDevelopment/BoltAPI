@@ -16,6 +16,7 @@ import org.bukkit.event.HandlerList;
  *
  * It is recommended to use this event to handle custom knockback support for players.
  * This event will be called whenever a player's knockback/combat settings need to be applied.
+ * If you want to override bolt's listener, set the priority of your listener to above NORMAL.
  *
  * @author Drizzy
  * @version BoltAPI

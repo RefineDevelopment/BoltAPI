@@ -37,9 +37,6 @@ dependencies {
 
 ## Usage
 
-The BoltAPI provides a comprehensive set of APIs for interacting with Bolt practice server functionality. All APIs are accessed through the main `BoltAPI` singleton instance.
-
-### Getting Started
 To hook into Bolt properly with the API, you need to set your plugin.yml to soft-depend on Retention (Refine's dynamic plugin loader system).
 
 ```yml
@@ -53,6 +50,9 @@ softdepend:
   - Retention # Define here
 ```
 
+The BoltAPI provides a comprehensive set of APIs for interacting with Bolt practice server functionality. All APIs are accessed through the main `BoltAPI` singleton instance.
+
+### Getting Started
 ```java
 import xyz.refinedev.practice.api.BoltAPI;
 

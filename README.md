@@ -50,8 +50,6 @@ BoltAPI api = BoltAPI.INSTANCE;
 
 ### Profile API
 
-Manage player profiles, settings, and states:
-
 ```java
 import xyz.refinedev.practice.api.profile.ProfileAPI;
 import xyz.refinedev.practice.api.profile.IProfile;

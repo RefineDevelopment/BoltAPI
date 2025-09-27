@@ -79,6 +79,7 @@ public interface IProfileSettings {
     void setPartyChat(boolean value);
 
     boolean isKitEditor();
+    void setKitEditor(boolean value);
 
     boolean isParkour();
 }

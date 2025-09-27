@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("xyz.refinedev.practice:BoltAPI:VERSION") // Replace VERSION with the latest version
+    compileOnly("xyz.refinedev.practice:BoltAPI:VERSION") // Replace VERSION with the latest version
 }
 ```
 

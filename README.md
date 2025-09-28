@@ -35,7 +35,7 @@ dependencies {
 </dependencies>
 ```
 
-## Usage
+## Usage (Example)
 
 To hook into Bolt properly with the API, you need to set your plugin.yml to soft-depend on Retention (Refine's dynamic plugin loader system).
 
@@ -60,7 +60,7 @@ import xyz.refinedev.practice.api.BoltAPI;
 BoltAPI api = BoltAPI.INSTANCE;
 ```
 
-### Profile API
+### Profile API (Example)
 
 ```java
 import xyz.refinedev.practice.api.profile.ProfileAPI;
@@ -84,7 +84,7 @@ profileAPI.refreshHotbar(profile);
 CompletableFuture<List<IProfileHistory>> histories = profileAPI.getProfileHistories(profile);
 ```
 
-### Match API
+### Match API (Example)
 
 ```java
 import xyz.refinedev.practice.api.match.MatchAPI;
@@ -106,7 +106,7 @@ IMatch playerMatch = matchAPI.getMatch(player);
 Collection<IMatch> matches = matchAPI.getMatches();
 ```
 
-### Queue API
+### Queue API (Example)
 
 ```java
 import xyz.refinedev.practice.api.queue.QueueAPI;
@@ -130,7 +130,7 @@ queueAPI.addToQueue(player, queue);
 queueAPI.removeFromQueue(player);
 ```
 
-### Kit API
+### Kit API (Example)
 
 ```java
 import xyz.refinedev.practice.api.kit.KitAPI;
@@ -162,7 +162,7 @@ List<IKit> allKits = kitAPI.getAllKits(); // Immutable list
 IKit kit = kitAPI.getKit("nodebuff");
 ```
 
-### Stats API
+### Stats API (Example)
 
 ```java
 import xyz.refinedev.practice.api.stats.StatsAPI;
@@ -180,7 +180,7 @@ CompletableFuture<IStatsProfile> statsFuture = statsAPI.getStatsProfile(playerUU
 statsAPI.saveStatsProfile(stats, true); // async save
 ```
 
-### Leaderboard API
+### Leaderboard API (Example)
 
 ```java
 import xyz.refinedev.practice.api.leaderboard.LeaderboardAPI;
@@ -201,7 +201,7 @@ leaderboardAPI.update();
 leaderboardAPI.clearCache();
 ```
 
-### Knockback API
+### Knockback API (Example)
 
 ```java
 import xyz.refinedev.api.knockback.IKnockbackHandler;
@@ -233,7 +233,7 @@ knockbackHandler.setHook(customHook);
 ```
 
 ### Events
-The API provides several events you can listen to:
+The API provides several events, here is an example on how you can implement them:
 
 ```java
 import xyz.refinedev.practice.api.profile.events.*;

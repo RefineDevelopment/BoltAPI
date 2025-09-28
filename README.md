@@ -1,5 +1,5 @@
 # Bolt API
-A simple and easy to use API for Bolt version 1.5 and above.
+A simple and easy to use API for Bolt version 1.6 and above.
 
 ## Installation
 ### Gradle

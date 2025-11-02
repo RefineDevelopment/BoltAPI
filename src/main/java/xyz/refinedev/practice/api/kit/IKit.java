@@ -521,8 +521,8 @@ public interface IKit {
     boolean isCrystalPvP();
     void setCrystalPvP(boolean crystalPvP);
 
-    boolean isCartPvP();
-    void setCartPvP(boolean cartPvP);
+    boolean isTntEnabled();
+    void setTntEnabled(boolean cartPvP);
 
     boolean isTntSumo();
     void setTntSumo(boolean tntSumo);

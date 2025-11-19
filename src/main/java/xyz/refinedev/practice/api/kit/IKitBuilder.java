@@ -70,7 +70,7 @@ public interface IKitBuilder {
     IKitBuilder liquidKill(boolean liquidKill);
     IKitBuilder mlgRush(boolean mlgRush);
     IKitBuilder crystalPvP(boolean crystalPvP);
-    IKitBuilder tntEnabled(boolean tntEnabled);
+    IKitBuilder tntDamageEnabled(boolean tntEnabled);
     IKitBuilder tntSumo(boolean tntSumo);
     IKitBuilder windChargeMode(boolean windChargeMode);
     IKitBuilder oitq(boolean oitq);

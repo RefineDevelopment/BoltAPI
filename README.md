@@ -7,7 +7,7 @@ A simple and easy to use API for Bolt version 1.6 and above.
 repositories {
     maven {
         name = "refine-public"
-        url = uri("https://maven.refinedev.xyz/public-repo/")
+        url = uri("https://maven.refinedev.org/public-repo/")
     }
 }
 
@@ -21,7 +21,7 @@ dependencies {
 <repositories>
     <repository>
         <id>refine-public</id>
-        <url>https://maven.refinedev.xyz/public-repo/</url>
+        <url>https://maven.refinedev.org/public-repo/</url>
     </repository>
 </repositories>
 

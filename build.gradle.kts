@@ -11,7 +11,7 @@ repositories {
     mavenCentral()
     mavenLocal()
 
-    maven("https://maven.refinedev.xyz/public-repo")
+    maven("https://maven.refinedev.org/public-repo")
 }
 
 java {
@@ -59,7 +59,7 @@ publishing {
 
          maven {
              name = "refine-public"
-             url = uri("https://maven.refinedev.xyz/public-repo")
+             url = uri("https://maven.refinedev.org/public-repo")
              credentials {
                  username = findProperty("mavenUsername") as String? ?: ""
                  password = findProperty("mavenPassword") as String? ?: ""

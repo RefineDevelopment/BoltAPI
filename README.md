@@ -1,5 +1,5 @@
 # Bolt API
-A simple and easy to use API for Bolt version 1.6 and above.
+Bolt's public API for profiles, queues, kits, matches, parties, tournaments, duels, stats, leaderboards, and knockback hooks.
 
 ## Installation
 ### Gradle
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("xyz.refinedev.practice:BoltAPI:VERSION") // Replace VERSION with the latest version
+    compileOnly("xyz.refinedev.practice:BoltAPI:VERSION")
 }
 ```
 
@@ -29,230 +29,222 @@ dependencies {
     <dependency>
         <groupId>xyz.refinedev.practice</groupId>
         <artifactId>BoltAPI</artifactId>
-        <version>VERSION</version> <!-- Replace VERSION with the latest version -->
+        <version>VERSION</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
 ```
 
-## Usage (Example)
-
-To hook into Bolt properly with the API, you need to set your plugin.yml to soft-depend on Retention (Refine's dynamic plugin loader system).
+## plugin.yml
+Bolt is loaded through Retention, so your plugin should soft-depend on it.
 
 ```yml
-name: TestPlugin
-version: 1.0.0
-description: "xyz"
-author: "xyz"
-main: "xyz"
-api-version: "1.13"
 softdepend:
-  - Retention # Define here
+  - Retention
 ```
 
-The BoltAPI provides a comprehensive set of APIs for interacting with Bolt practice server functionality. All APIs are accessed through the main `BoltAPI` singleton instance.
-
-### Getting Started
+## Getting Started
 ```java
 import xyz.refinedev.practice.api.BoltAPI;
 
-// Get the main API instance
 BoltAPI api = BoltAPI.INSTANCE;
 ```
 
-### Profile API (Example)
-
+## Match API
 ```java
-import xyz.refinedev.practice.api.profile.ProfileAPI;
-import xyz.refinedev.practice.api.profile.IProfile;
-
-ProfileAPI profileAPI = api.getProfileAPI();
-
-// Get a player's profile
-IProfile profile = profileAPI.getProfile(player);
-
-// Fetch a profile asynchronously (useful for offline players)
-CompletableFuture<IProfile> profileFuture = profileAPI.fetchProfile(playerUUID);
-
-// Save a profile
-profileAPI.saveProfile(profile, true); // async save
-
-// Refresh player's hotbar based on their state
-profileAPI.refreshHotbar(profile);
-
-// Get profile histories
-CompletableFuture<List<IProfileHistory>> histories = profileAPI.getProfileHistories(profile);
-```
-
-### Match API (Example)
-
-```java
-import xyz.refinedev.practice.api.match.MatchAPI;
+import org.bukkit.entity.Player;
+import xyz.refinedev.practice.api.kit.IKit;
 import xyz.refinedev.practice.api.match.IMatch;
+import xyz.refinedev.practice.api.match.MatchAPI;
 import xyz.refinedev.practice.api.match.enums.MatchEndReason;
 
 MatchAPI matchAPI = api.getMatchAPI();
 
-// End a match properly (handles stats, ELO, etc.)
-matchAPI.end(match, MatchEndReason.PLAYER_DISCONNECT);
+IMatch currentMatch = matchAPI.getMatchByPlayer(player);
+IMatch sameMatch = matchAPI.getMatch(player); // alias
 
-// Terminate a match (cleanup only)
-matchAPI.terminateMatch(match);
+matchAPI.end(currentMatch, MatchEndReason.NORMAL);
+matchAPI.terminateMatch(currentMatch);
 
-// Get a player's current match
-IMatch playerMatch = matchAPI.getMatch(player);
+IMatch ranked = matchAPI.createSoloRankedMatch(playerA, playerB, kit);
+IMatch unranked = matchAPI.createSoloUnrankedMatch(playerA, playerB, kit);
+IMatch teamMatch = matchAPI.createTeamMatch(teamAPlayers, teamBPlayers, kit, true);
 
-// Get all active matches
-Collection<IMatch> matches = matchAPI.getMatches();
+matchAPI.handleRespawn(currentMatch, player);
+int fighting = matchAPI.getFightingCount();
+int botFights = matchAPI.getBotMatchesCount();
 ```
 
-### Queue API (Example)
+Useful `IMatch` runtime methods:
 
 ```java
-import xyz.refinedev.practice.api.queue.QueueAPI;
-import xyz.refinedev.practice.api.queue.IQueue;
+List<Player> spectators = match.getSpectatingPlayers();
+List<Player> alive = match.getAlivePlayers();
+List<? extends IMatchPlayer> players = match.getMatchPlayers();
+List<? extends IMatchTeam> teams = match.getMatchTeams();
 
+IMatchPlayer winner = match.getWinningPlayer();
+IMatchTeam winningTeam = match.getWinningTeam();
+
+String duration = match.getDuration();
+String lasted = match.getLasted();
+```
+
+## Party API
+```java
+import xyz.refinedev.practice.api.party.IParty;
+import xyz.refinedev.practice.api.party.IPartySettings;
+import xyz.refinedev.practice.api.party.PartyAPI;
+
+PartyAPI partyAPI = api.getPartyAPI();
+
+IParty party = partyAPI.createParty(leader);
+partyAPI.invite(leader, invitedPlayer);
+partyAPI.join(invitedPlayer, party);
+partyAPI.promote(leader, newLeader);
+partyAPI.kick(newLeader, kickedMember);
+partyAPI.leave(member);
+partyAPI.disband(newLeader);
+
+boolean canQueueRanked = partyAPI.canQueue(party, true);
+
+IParty currentParty = partyAPI.getParty(player);
+IPartySettings settings = currentParty.getSettings();
+```
+
+Useful `IParty` runtime methods:
+
+```java
+String name = party.getName();
+PartyState state = party.getState();
+boolean busy = party.isBusy();
+
+List<UUID> invites = party.getInvites();
+boolean invited = party.isInvited(player.getUniqueId());
+boolean member = party.isMember(player.getUniqueId());
+
+IQueue queue = party.getQueue();
+IMatch partyMatch = party.getMatch();
+party.reloadHotbar();
+party.reloadNameTag();
+```
+
+## Duel API
+```java
+import xyz.refinedev.practice.api.duel.DuelAPI;
+import xyz.refinedev.practice.api.duel.IDuelRequest;
+import xyz.refinedev.practice.api.duel.IPartyDuelRequest;
+import xyz.refinedev.practice.api.duel.IProfileDuelRequest;
+
+DuelAPI duelAPI = api.getDuelAPI();
+
+IProfileDuelRequest soloRequest = duelAPI.request(playerA, playerB, kit);
+IProfileDuelRequest sameSoloRequest = duelAPI.getRequest(playerA, playerB);
+
+IPartyDuelRequest partyRequest = duelAPI.request(partyA, partyB, kit);
+IPartyDuelRequest samePartyRequest = duelAPI.getRequest(partyA, partyB);
+
+Collection<IDuelRequest> activeRequests = duelAPI.getActiveRequests();
+
+if (soloRequest != null && soloRequest.isActive()) {
+    soloRequest.accept();
+}
+
+if (partyRequest != null && partyRequest.isActive()) {
+    duelAPI.cancel(partyRequest);
+}
+```
+
+Bolt handles arena selection internally for API-created duel requests.
+
+## Tournament API
+```java
+import org.bukkit.command.CommandSender;
+import xyz.refinedev.practice.api.tournament.ITournament;
+import xyz.refinedev.practice.api.tournament.TournamentAPI;
+import xyz.refinedev.practice.api.tournament.TournamentEndReason;
+import xyz.refinedev.practice.api.tournament.TournamentType;
+
+TournamentAPI tournamentAPI = api.getTournamentAPI();
+
+ITournament soloTournament = tournamentAPI.startTournament(sender, kit, TournamentType.SOLO);
+ITournament teamTournament = tournamentAPI.startTournament(sender, kit, TournamentType.TEAM, 2);
+
+tournamentAPI.join(player);
+tournamentAPI.leave(player);
+tournamentAPI.forceStart();
+tournamentAPI.cancelTournament();
+tournamentAPI.end(TournamentEndReason.CANCELLED);
+```
+
+Useful `ITournament` runtime methods:
+
+```java
+List<? extends IMatch> matches = tournament.getMatches();
+List<Player> players = tournament.getPlayerParticipants();
+List<IParty> parties = tournament.getPartyParticipants();
+
+Player winningPlayer = tournament.getWinningPlayer();
+IParty winningParty = tournament.getWinningParty();
+Object winningSubject = tournament.getWinningSubject();
+```
+
+## Other APIs
+```java
+ProfileAPI profileAPI = api.getProfileAPI();
 QueueAPI queueAPI = api.getQueueAPI();
-
-// Get a queue by ID
-IQueue queue = queueAPI.getQueue(queueUUID);
-
-// Get all solo queues
-List<IQueue> soloQueues = queueAPI.getSoloQueues();
-
-// Get all duo queues
-List<IQueue> duoQueues = queueAPI.getDuoQueues();
-
-// Add player to queue
-queueAPI.addToQueue(player, queue);
-
-// Remove player from queue
-queueAPI.removeFromQueue(player);
-```
-
-### Kit API (Example)
-
-```java
-import xyz.refinedev.practice.api.kit.KitAPI;
-import xyz.refinedev.practice.api.kit.IKit;
-import xyz.refinedev.practice.api.kit.IKitBuilder;
-
 KitAPI kitAPI = api.getKitAPI();
-
-// Create a new kit
-IKitBuilder builder = kitAPI.createBuilder();
-IKit kit = builder
-    .name("nodebuff")
-    .displayName("&cNo Debuff")
-    .displayIcon(new ItemStack(Material.POTION))
-    .build();
-
-kit.setDefaultInventory(new ItemStack[] { /* items */ });
-kit.setDefaultArmor(new ItemStack[] { /* armor */ });
-
-kitAPI.registerKit(kit, true); // register and save the kit
-
-// Apply kit to player
-kit.applyKit(player);
-
-// Get all kits
-List<IKit> allKits = kitAPI.getAllKits(); // Immutable list
-
-// Get a kit by name
-IKit kit = kitAPI.getKit("nodebuff");
-```
-
-### Stats API (Example)
-
-```java
-import xyz.refinedev.practice.api.stats.StatsAPI;
-import xyz.refinedev.practice.api.stats.IStatsProfile;
-
 StatsAPI statsAPI = api.getStatsAPI();
-
-// Get player's stats profile
-IStatsProfile stats = statsAPI.getStatsProfile(player);
-
-// Get stats asynchronously from the database
-CompletableFuture<IStatsProfile> statsFuture = statsAPI.getStatsProfile(playerUUID);
-
-// Save stats profile
-statsAPI.saveStatsProfile(stats, true); // async save
-```
-
-### Leaderboard API (Example)
-
-```java
-import xyz.refinedev.practice.api.leaderboard.LeaderboardAPI;
-import xyz.refinedev.practice.api.leaderboard.meta.IKitLeaderboard;
-
 LeaderboardAPI leaderboardAPI = api.getLeaderboardAPI();
-
-// Get leaderboard for a specific kit
-CompletableFuture<IKitLeaderboard> leaderboard = leaderboardAPI.getKitLeaderboard(kit, 10);
-
-// Get global leaderboard
-CompletableFuture<IKitLeaderboard> globalLeaderboard = leaderboardAPI.getGlobalLeaderboard(10);
-
-// Update leaderboards (should be called asynchronously)
-leaderboardAPI.update();
-
-// Clear cached leaderboard data
-leaderboardAPI.clearCache();
-```
-
-### Knockback API (Example)
-
-```java
-import xyz.refinedev.api.knockback.IKnockbackHandler;
-import xyz.refinedev.api.knockback.KnockbackHook;
-
 IKnockbackHandler knockbackHandler = api.getKnockbackHandler();
-
-// Implement custom knockback
-KnockbackHook customHook = new KnockbackHook() {
-    
-    @Override
-    public String getName() {
-        return "Paper";
-    }
-    
-    @Override
-    public boolean isApplicable() {
-        return true;
-    }
-
-    @Override
-    public void setKnockback(@NotNull Player player, @NotNull String knockbackProfile) {
-        // Custom knockback logic here
-    }
-};
-
-// Set your custom knockback implementation
-knockbackHandler.setHook(customHook);
 ```
 
-### Events
-The API provides several events, here is an example on how you can implement them:
+## Events
+Solo-only match events:
 
 ```java
-import xyz.refinedev.practice.api.profile.events.*;
-
 @EventHandler
-public void onProfileJoin(ProfileJoinEvent event) {
-    IProfile profile = event.getProfile();
-    // Handle profile join
+public void onSoloWin(MatchWinEvent event) {
+    IMatchPlayer winner = event.getWinner();
+}
+```
+
+Team-safe match events:
+
+```java
+@EventHandler
+public void onTeamWin(MatchTeamWinEvent event) {
+    IMatchTeam winningTeam = event.getWinningTeam();
 }
 
 @EventHandler
-public void onProfileLeave(ProfileLeaveEvent event) {
-    IProfile profile = event.getProfile();
-    // Handle profile leave
+public void onTeamLose(MatchTeamLoseEvent event) {
+    IMatchTeam losingTeam = event.getLosingTeam();
 }
 
 @EventHandler
-public void onProfileKnockback(ProfileKnockbackEvent event) {
-    Player player = event.getPlayer();
-    // Triggered when knockback is applied, use priority above NORMAL to override behavior
+public void onTeamPreEnd(MatchTeamPreEndEvent event) {
+    if (event.getMatch().isPartyMode()) {
+        // Optional cancellation hook
+    }
+}
+
+@EventHandler
+public void onTeamRoundEnd(MatchTeamRoundEndEvent event) {
+    int round = event.getRound();
+}
+```
+
+Party and tournament lifecycle events:
+
+```java
+@EventHandler
+public void onPartyCreate(PartyCreateEvent event) {
+    IParty party = event.getParty();
+}
+
+@EventHandler
+public void onTournamentStart(TournamentStartEvent event) {
+    ITournament tournament = event.getTournament();
 }
 ```

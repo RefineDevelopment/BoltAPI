@@ -92,4 +92,13 @@ public interface ProfileAPI {
      */
     void refreshVisibilityOthers(IProfile profile);
 
+    /**
+     * Refresh the nametag of a player.
+     * This is useful for external core integrations (e.g., RankChangeEvent)
+     * to update the player's nametag after a rank change.
+     *
+     * @param player {@link Player} whose nametag should be refreshed
+     */
+    void refreshNametag(Player player);
+
 }

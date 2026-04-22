@@ -601,4 +601,19 @@ public interface IKit {
      * @param duelEnabled true to enable, false to disable
      */
     void setDuelEnabled(boolean duelEnabled);
+
+    /**
+     * Is crafting allowed in this kit? When true, players can use
+     * their inventory crafting grid and workbenches during matches.
+     *
+     * @return true if crafting is allowed, false otherwise
+     */
+    boolean isAllowCrafting();
+
+    /**
+     * Sets whether crafting is allowed for this kit.
+     *
+     * @param allowCrafting true to allow crafting, false to disable
+     */
+    void setAllowCrafting(boolean allowCrafting);
 }

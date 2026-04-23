@@ -571,4 +571,49 @@ public interface IKit {
 
     int getQueueSlot();
     void setQueueSlot(int queueSlot);
+
+    /**
+     * Whether this kit is available in unranked queues.
+     * If false, the kit will not appear in unranked solo/duo queue menus.
+     *
+     * @return true if available in unranked queues, false otherwise
+     */
+    boolean isUnrankedQueueEnabled();
+
+    /**
+     * Sets whether this kit is available in unranked queues.
+     *
+     * @param unrankedQueueEnabled true to enable, false to disable
+     */
+    void setUnrankedQueueEnabled(boolean unrankedQueueEnabled);
+
+    /**
+     * Whether this kit is available for duels.
+     * If false, the kit will not appear in the duel kit selection menu.
+     *
+     * @return true if available for duels, false otherwise
+     */
+    boolean isDuelEnabled();
+
+    /**
+     * Sets whether this kit is available for duels.
+     *
+     * @param duelEnabled true to enable, false to disable
+     */
+    void setDuelEnabled(boolean duelEnabled);
+
+    /**
+     * Is crafting allowed in this kit? When true, players can use
+     * their inventory crafting grid and workbenches during matches.
+     *
+     * @return true if crafting is allowed, false otherwise
+     */
+    boolean isAllowCrafting();
+
+    /**
+     * Sets whether crafting is allowed for this kit.
+     *
+     * @param allowCrafting true to allow crafting, false to disable
+     */
+    void setAllowCrafting(boolean allowCrafting);
 }

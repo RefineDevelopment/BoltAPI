@@ -17,6 +17,7 @@ import xyz.refinedev.practice.api.match.meta.IPostMatchInventory;
 import xyz.refinedev.practice.api.queue.IQueue;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -467,6 +468,127 @@ public interface IMatch {
      * @return {@link List}
      */
     List<Player> getPlayersAndSpectators();
+
+    /**
+     * Returns the currently spectating players as Bukkit player instances.
+     *
+     * @return a list of spectators
+     */
+    default List<Player> getSpectatingPlayers() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Returns the alive players currently participating in the match.
+     *
+     * @return a list of alive players
+     */
+    default List<Player> getAlivePlayers() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Returns all tracked match players for this match.
+     *
+     * @return all match players
+     */
+    default List<? extends IMatchPlayer> getMatchPlayers() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Returns all tracked match teams for this match.
+     *
+     * @return all match teams
+     */
+    default List<? extends IMatchTeam> getMatchTeams() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Returns the winning player for solo-oriented matches.
+     *
+     * @return the winning player, or null
+     */
+    @Nullable
+    default IMatchPlayer getWinningPlayer() {
+        return null;
+    }
+
+    /**
+     * Returns the winning team for team-oriented matches.
+     *
+     * @return the winning team, or null
+     */
+    @Nullable
+    default IMatchTeam getWinningTeam() {
+        return null;
+    }
+
+    /**
+     * Returns the first tracked player for a solo match.
+     *
+     * @return the first player, or null
+     */
+    @Nullable
+    default IMatchPlayer getMatchPlayerA() {
+        return null;
+    }
+
+    /**
+     * Returns the second tracked player for a solo match.
+     *
+     * @return the second player, or null
+     */
+    @Nullable
+    default IMatchPlayer getMatchPlayerB() {
+        return null;
+    }
+
+    /**
+     * Returns the first tracked team for a team match.
+     *
+     * @return the first team, or null
+     */
+    @Nullable
+    default IMatchTeam getMatchTeamA() {
+        return null;
+    }
+
+    /**
+     * Returns the second tracked team for a team match.
+     *
+     * @return the second team, or null
+     */
+    @Nullable
+    default IMatchTeam getMatchTeamB() {
+        return null;
+    }
+
+    /**
+     * Returns actively fighting match players.
+     *
+     * @return the fighting players
+     */
+    default List<? extends IMatchPlayer> getFightingPlayers() {
+        return Collections.emptyList();
+    }
+
+    /**
+     * Returns the elapsed lifetime of this match once it has ended.
+     *
+     * @return a human-readable duration string
+     */
+    default String getLasted() {
+        return "0s";
+    }
+
+    /**
+     * @return true if Bolt should distribute stats for this match
+     */
+    default boolean shouldDistributeStats() {
+        return !this.isTimedOut() && !this.isForcedEnd();
+    }
 
     /**
      * The post match inventory snapshot for a specific player.

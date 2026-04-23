@@ -8,9 +8,12 @@ import xyz.refinedev.api.knockback.KnockbackHook;
 import xyz.refinedev.practice.api.kit.KitAPI;
 import xyz.refinedev.practice.api.leaderboard.LeaderboardAPI;
 import xyz.refinedev.practice.api.match.MatchAPI;
+import xyz.refinedev.practice.api.duel.DuelAPI;
+import xyz.refinedev.practice.api.party.PartyAPI;
 import xyz.refinedev.practice.api.profile.ProfileAPI;
 import xyz.refinedev.practice.api.queue.QueueAPI;
 import xyz.refinedev.practice.api.stats.StatsAPI;
+import xyz.refinedev.practice.api.tournament.TournamentAPI;
 
 /**
  * <p>
@@ -34,6 +37,9 @@ public enum BoltAPI {
     private MatchAPI matchAPI;
     private StatsAPI statsAPI;
     private LeaderboardAPI leaderboardAPI;
+    private PartyAPI partyAPI;
+    private TournamentAPI tournamentAPI;
+    private DuelAPI duelAPI;
 
     /**
      * Bolt's knockback API to allow custom knockback implementations
@@ -96,6 +102,24 @@ public enum BoltAPI {
         this.leaderboardAPI = leaderboardAPI;
     }
 
+    public PartyAPI getPartyAPI() {
+        Preconditions.checkNotNull(partyAPI, "PartyAPI has not been initialized yet.");
+        return partyAPI;
+    }
+
+    public void setPartyAPI(PartyAPI partyAPI) {
+        this.partyAPI = partyAPI;
+    }
+
+    public TournamentAPI getTournamentAPI() {
+        Preconditions.checkNotNull(tournamentAPI, "TournamentAPI has not been initialized yet.");
+        return tournamentAPI;
+    }
+
+    public void setTournamentAPI(TournamentAPI tournamentAPI) {
+        this.tournamentAPI = tournamentAPI;
+    }
+
     public IKnockbackHandler getKnockbackHandler() {
         Preconditions.checkNotNull(knockbackHandler, "KnockbackHandler has not been initialized yet.");
         return knockbackHandler;
@@ -103,5 +127,14 @@ public enum BoltAPI {
 
     public void setKnockbackHandler(IKnockbackHandler knockbackHandler) {
         this.knockbackHandler = knockbackHandler;
+    }
+
+    public DuelAPI getDuelAPI() {
+        Preconditions.checkNotNull(duelAPI, "DuelAPI has not been initialized yet.");
+        return duelAPI;
+    }
+
+    public void setDuelAPI(DuelAPI duelAPI) {
+        this.duelAPI = duelAPI;
     }
 }

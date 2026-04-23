@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 
 import org.jetbrains.annotations.Nullable;
 
+import xyz.refinedev.practice.api.kit.IKit;
 import xyz.refinedev.practice.api.match.enums.MatchDeathReason;
 import xyz.refinedev.practice.api.match.enums.MatchEndReason;
 import xyz.refinedev.practice.api.match.meta.IPostMatchInventory;
@@ -108,6 +109,17 @@ public interface MatchAPI {
      @Nullable IMatch getMatch(UUID id);
 
     /**
+     * Alias for {@link #getMatchByPlayer(Player)}.
+     *
+     * @param player the player whose active match should be returned
+     * @return the current match, or null
+     */
+    @Nullable
+    default IMatch getMatch(Player player) {
+        return this.getMatchByPlayer(player);
+    }
+
+    /**
      * Get a {@link Collection} of all ongoing matches.
      *
      * @return {@link Collection}
@@ -121,4 +133,74 @@ public interface MatchAPI {
      * @return {@link IMatch} or null if not in a match
      */
     @Nullable IMatch getMatchByPlayer(Player player);
+
+    /**
+     * Handles a match respawn using Bolt's normal respawn flow.
+     *
+     * @param match  the match
+     * @param player the player respawning
+     */
+    default void handleRespawn(IMatch match, Player player) {
+    }
+
+    /**
+     * Returns a cached post-match inventory snapshot by player UUID.
+     *
+     * @param playerId the player uuid
+     * @return the snapshot, or null if none is cached
+     */
+    @Nullable
+    default IPostMatchInventory getInventory(UUID playerId) {
+        return null;
+    }
+
+    /**
+     * @return the total number of fighters across all matches
+     */
+    default int getFightingCount() {
+        return 0;
+    }
+
+    /**
+     * @return the total number of players inside bot matches
+     */
+    default int getBotMatchesCount() {
+        return 0;
+    }
+
+    /**
+     * Creates and starts a solo ranked match between two players using the specified kit.
+     * An arena will be automatically selected. If no arena is available, null is returned.
+     * This is useful for external integrations (e.g., Discord bots) to force-start
+     * ranked matches programmatically.
+     *
+     * @param playerA The first player
+     * @param playerB The second player
+     * @param kit     The kit to use for the match
+     * @return The created {@link IMatch}, or null if the match could not be created
+     */
+    @Nullable IMatch createSoloRankedMatch(Player playerA, Player playerB, IKit kit);
+
+    /**
+     * Creates and starts a solo unranked match between two players using the specified kit.
+     * An arena will be automatically selected. If no arena is available, null is returned.
+     *
+     * @param playerA The first player
+     * @param playerB The second player
+     * @param kit     The kit to use for the match
+     * @return The created {@link IMatch}, or null if the match could not be created
+     */
+    @Nullable IMatch createSoloUnrankedMatch(Player playerA, Player playerB, IKit kit);
+
+    /**
+     * Creates and starts a team match between two teams using the specified kit.
+     * An arena will be automatically selected. If no arena is available, null is returned.
+     *
+     * @param teamA The first team's player list
+     * @param teamB The second team's player list
+     * @param kit   The kit to use for the match
+     * @param ranked Whether the match is ranked
+     * @return The created {@link IMatch}, or null if the match could not be created
+     */
+    @Nullable IMatch createTeamMatch(java.util.List<Player> teamA, java.util.List<Player> teamB, IKit kit, boolean ranked);
 }

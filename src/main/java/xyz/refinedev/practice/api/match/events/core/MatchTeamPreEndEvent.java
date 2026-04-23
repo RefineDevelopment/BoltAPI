@@ -1,0 +1,45 @@
+package xyz.refinedev.practice.api.match.events.core;
+
+import lombok.Getter;
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
+import xyz.refinedev.practice.api.match.IMatch;
+import xyz.refinedev.practice.api.match.meta.IMatchTeam;
+
+/**
+ * Team-safe equivalent of {@link MatchPreEndEvent}.
+ */
+@Getter
+public class MatchTeamPreEndEvent extends Event implements Cancellable {
+
+    private static final HandlerList handlers = new HandlerList();
+
+    private final IMatch match;
+    private final IMatchTeam winningTeam;
+    private boolean cancelled;
+
+    public MatchTeamPreEndEvent(IMatch match, IMatchTeam winningTeam) {
+        this.match = match;
+        this.winningTeam = winningTeam;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+}

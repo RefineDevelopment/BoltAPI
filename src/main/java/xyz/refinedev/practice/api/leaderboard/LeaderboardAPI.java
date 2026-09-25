@@ -52,4 +52,14 @@ public interface LeaderboardAPI {
      * @return A {@link CompletableFuture} that will complete with an array of ILeaderboardEntry objects representing the top players.
      */
     CompletableFuture<ILeaderboardEntry[]> fetchGlobalLeaderboard(int amount, LeaderboardType type);
+
+    /**
+     * Fetches the global elo position a player with the given global elo holds: the number of
+     * saved profiles with a strictly higher global elo, plus one. Reads the database directly
+     * rather than the top-10 cache, so it works for any position.
+     *
+     * @param globalElo The global elo to rank.
+     * @return A {@link CompletableFuture} that will complete with the 1-based position.
+     */
+    CompletableFuture<Integer> fetchGlobalEloPosition(int globalElo);
 }

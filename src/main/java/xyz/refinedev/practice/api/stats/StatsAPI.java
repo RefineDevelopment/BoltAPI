@@ -1,9 +1,11 @@
 package xyz.refinedev.practice.api.stats;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.ToIntFunction;
 
 /**
  * <p>
@@ -42,6 +44,24 @@ public interface StatsAPI {
      * @param async        whether to save the stats profile asynchronously or not
      */
     void saveStatsProfile(IStatsProfile statsProfile, boolean async);
+
+    /**
+     * Replace the formula that turns a profile's kit elos into its global elo.
+     * Bolt applies it wherever it recalculates a global elo: after ranked matches,
+     * elo commands and when a profile loads. A formula that throws falls back to the default.
+     *
+     * @param formula profile → global elo, or {@code null} for the default (average elo of the ranked kits)
+     */
+    void setGlobalEloFormula(@Nullable ToIntFunction<IStatsProfile> formula);
+
+    /**
+     * Recalculate every saved profile's global elo with the current formula and store it,
+     * so leaderboards and positions match after the formula changes. Online profiles are
+     * recalculated on the main thread and saved as usual.
+     *
+     * @return {@link CompletableFuture} with the number of stored profiles whose global elo changed
+     */
+    CompletableFuture<Integer> recalculateGlobalElo();
 
     //TODO: Leaderboards
 }

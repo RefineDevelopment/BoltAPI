@@ -130,6 +130,19 @@ public interface PartyAPI {
         return disbandSilent(leader) ? PartyOpResult.SUCCESS : PartyOpResult.UNKNOWN_FAILURE;
     }
 
+    /**
+     * Controls whether party mutations executed by the current thread may emit Bolt's own
+     * player-facing feedback. Integrations must restore {@code false} in a {@code finally}
+     * block after the operation. The flag is thread-local, so it never mutes other players'
+     * concurrent party actions.
+     */
+    default void setSilent(boolean silent) {
+    }
+
+    default boolean isSilent() {
+        return false;
+    }
+
     default boolean isInvited(IParty party, Player target) {
         return party != null && target != null && party.isInvited(target.getUniqueId());
     }
